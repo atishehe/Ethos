@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDataCache } from '@/contexts/DataCacheContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { Calculator, Database, Zap, CheckCircle, Loader2 } from 'lucide-react';
+import { clear } from 'console';
 
 // Mathematical symbols component
 const MathSymbol = ({ symbol, size = 16, className = "" }) => (
@@ -40,14 +41,14 @@ const DataPreloader: React.FC<DataPreloaderProps> = ({ children }) => {
 
       // Check if we need to preload data
       const hasCachedData = Object.keys(cache.students).length > 0;
-      
+      let progressInterval = null;
       if (!hasCachedData) {
         setIsPreloading(true);
         setPreloadMessage('Preloading competition data...');
         
         try {
           // Simulate progress updates
-          const progressInterval = setInterval(() => {
+          progressInterval = setInterval(() => {
             setPreloadProgress(prev => {
               if (prev >= 90) {
                 clearInterval(progressInterval);
@@ -71,6 +72,7 @@ const DataPreloader: React.FC<DataPreloaderProps> = ({ children }) => {
         } catch (error) {
           console.error('Failed to preload data:', error);
           setPreloadMessage('Data loading completed with some issues');
+          if(progressInterval) clearInterval(progressInterval);
           setTimeout(() => {
             setIsPreloading(false);
           }, 2000);

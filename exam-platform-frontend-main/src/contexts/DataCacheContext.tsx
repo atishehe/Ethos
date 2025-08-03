@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -127,7 +127,7 @@ export const DataCacheProvider: React.FC<{ children: ReactNode }> = ({ children 
     await preloadCollegeData(collegeName);
   };
 
-  const preloadAllData = async (): Promise<void> => {
+  const preloadAllData = useCallback(async (): Promise<void> => {
     setCache(prev => ({ ...prev, isLoading: true }));
     
     try {
@@ -156,7 +156,7 @@ export const DataCacheProvider: React.FC<{ children: ReactNode }> = ({ children 
     } finally {
       setCache(prev => ({ ...prev, isLoading: false }));
     }
-  };
+  }, []);
 
   const clearCache = () => {
     setCache({
