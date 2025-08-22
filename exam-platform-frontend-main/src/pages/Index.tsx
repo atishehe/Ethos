@@ -17,12 +17,12 @@ const Index = () => {
   const [statsCount, setStatsCount] = useState({ players: 0, problems: 0, competitions: 0 });
 
   // Animated counter effect
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setStatsCount({ players: 2847, problems: 563, competitions: 3 });
-  //   }, 1000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStatsCount({ players: 2847, problems: 563, competitions: 3 });
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Particle animation trigger
   useEffect(() => {

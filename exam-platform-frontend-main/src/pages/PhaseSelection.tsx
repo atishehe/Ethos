@@ -268,7 +268,7 @@ const PhaseSelection = () => {
             icon={Crown}
             color="from-violet-100 via-purple-100 to-indigo-100 border-violet-200"
             delay={600}
-            isUnlocked={false}
+            isUnlocked={true}
             isCompleted={completedPhases.includes(3)}
             onNavigate={handleNavigate}
           />

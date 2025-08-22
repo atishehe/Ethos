@@ -77,7 +77,7 @@ export const DataCacheProvider: React.FC<{ children: ReactNode }> = ({ children 
     }
   }, [cache]);
 
-  const preloadCollegeData = async (collegeName: string): Promise<void> => {
+  const preloadCollegeData = useCallback(async (collegeName: string): Promise<void> => {
     if (cache.students[collegeName] && !loadingStates[collegeName]) {
       return; // Already cached and not loading
     }
@@ -86,6 +86,7 @@ export const DataCacheProvider: React.FC<{ children: ReactNode }> = ({ children 
 
     try {
       console.log(`Preloading data for ${collegeName}...`);
+      console.log(`API URL: ${API_BASE_URL}/api/college/${collegeName}`);
       const response = await axios.get(`${API_BASE_URL}/api/college/${collegeName}`);
       
       if (response.data && response.data[collegeName]) {
@@ -104,7 +105,7 @@ export const DataCacheProvider: React.FC<{ children: ReactNode }> = ({ children 
     } finally {
       setLoadingStates(prev => ({ ...prev, [collegeName]: false }));
     }
-  };
+  }, []);
 
   const getCollegeStudents = (collegeName: string): StudentData[] | null => {
     return cache.students[collegeName] || null;

@@ -38,7 +38,7 @@ router.post('/add', async (req, res) => {
 // Get students by college name
 router.get('/:collegeName', async (req, res) => {
   const { collegeName } = req.params;
-
+  console.log(`Fetching students for college: ${collegeName}`);
   try {
     const record = await CollegeStudents.findOne({ collegeName });
     if (!record) {

@@ -402,27 +402,27 @@ const AttendanceSheet = () => {
     });
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white p-4">
-        <div className="max-w-6xl mx-auto">
-          <Card className="bg-white/90 backdrop-blur-xl border-gray-200 shadow-2xl p-8 space-y-6">
-            <div className="text-center space-y-4">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4 animate-pulse">
-                <span className="text-2xl font-bold text-white">∫</span>
-              </div>
-              <h2 className="text-3xl font-bold text-gray-800">Loading Competition Data...</h2>
-            </div>
-            <div className="space-y-4">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-12 w-full bg-gray-200 animate-pulse rounded-lg"></div>
-              ))}
-            </div>
-          </Card>
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white p-4">
+  //       <div className="max-w-6xl mx-auto">
+  //         <Card className="bg-white/90 backdrop-blur-xl border-gray-200 shadow-2xl p-8 space-y-6">
+  //           <div className="text-center space-y-4">
+  //             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4 animate-pulse">
+  //               <span className="text-2xl font-bold text-white">∫</span>
+  //             </div>
+  //             <h2 className="text-3xl font-bold text-gray-800">Loading Competition Data...</h2>
+  //           </div>
+  //           <div className="space-y-4">
+  //             {[...Array(4)].map((_, i) => (
+  //               <div key={i} className="h-12 w-full bg-gray-200 animate-pulse rounded-lg"></div>
+  //             ))}
+  //           </div>
+  //         </Card>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   if (error) {
     return (
