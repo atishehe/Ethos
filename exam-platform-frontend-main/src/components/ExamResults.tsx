@@ -33,6 +33,8 @@ interface User {
   _id: string;
   isSelected?: boolean;
   groupNumber?: number;
+  score?: number;
+  totalScore?: number;
 }
 
 interface GroupWithNumber {

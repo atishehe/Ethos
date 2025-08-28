@@ -319,15 +319,12 @@ const AttendanceSheet = () => {
   };
 
   const finishGroupFormation = () => {
-    // If there are students in current group, add them first
-    if (currentGroupMembers.length > 0) {
-      addCurrentGroup();
-    }
-    
-    setIsFormingGroups(false);
-    
-    // Check if any groups were formed
-    if (groups.length === 0) {
+    // Compute the final groups synchronously to avoid async state lag
+    const finalGroups = currentGroupMembers.length > 0
+      ? [...groups, currentGroupMembers]
+      : groups;
+
+    if (finalGroups.length === 0) {
       toast({
         title: "∫ No Groups Formed",
         description: "Please form at least one group before proceeding.",
@@ -335,6 +332,13 @@ const AttendanceSheet = () => {
       });
       return;
     }
+
+    // Commit final groups and reset formation state
+    setGroups(finalGroups);
+    setCurrentGroupMembers([]);
+    setCurrentGroupNumber(finalGroups.length + 1);
+    setIsFormingGroups(false);
+    setShowGoButton(true);
   };
 
   const getScoringSystem = (totalParticipants: number) => {

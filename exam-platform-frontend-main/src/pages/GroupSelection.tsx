@@ -88,6 +88,7 @@ const GameifiedGroupCard = ({
   isSelected,
   onSelect,
   pulseAnimation,
+  onLaunch,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [glowEffect, setGlowEffect] = useState(false);
@@ -218,6 +219,12 @@ const GameifiedGroupCard = ({
                 : "bg-gray-200/50 border border-gray-300 text-gray-500"
             }`}
             disabled={!isSelected}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!isSelected) return;
+              onSelect(index);
+              onLaunch && onLaunch(index);
+            }}
           >
             {isSelected ? (
               <>
@@ -541,6 +548,43 @@ const GroupSelection = () => {
               isSelected={selectedGroupIndex === index}
               onSelect={handleGroupSelect}
               pulseAnimation={pulseAnimation}
+              onLaunch={(launchIndex: number) => {
+                const selected = remainingGroups[launchIndex];
+                const updated = remainingGroups.filter((_, i) => i !== launchIndex);
+                const studentsWithCorrectGroupNumber = selected.group.map((student) => ({
+                  name: student.name,
+                  roll: student.rollNo,
+                  groupNumber: selected.groupNumber,
+                }));
+                navigate("/exam", {
+                  state: {
+                    group: selected.group,
+                    collegeName,
+                    studentsWithGroupNumbers: studentsWithCorrectGroupNumber,
+                    roundNumber,
+                    groupIndex: selected.groupNumber,
+                    totalParticipants,
+                    scoringSystem,
+                    scalingInfo,
+                    remainingGroups: updated,
+                  },
+                });
+                localStorage.setItem(
+                  LOCAL_STORAGE_KEY,
+                  JSON.stringify({
+                    groups: initialGroups,
+                    remainingGroups: updated,
+                    studentsWithGroupNumbers,
+                    collegeName,
+                    roundNumber,
+                    totalParticipants,
+                    scoringSystem,
+                    scalingInfo,
+                  })
+                );
+                setRemainingGroups(updated);
+                setSelectedGroupIndex(null);
+              }}
             />
           ))}
         </div>

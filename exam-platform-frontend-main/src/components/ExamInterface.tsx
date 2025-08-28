@@ -426,6 +426,7 @@ const ExamInterface: React.FC<Props> = ({
           collegeName,
           remainingGroups,
           groupNumber,
+          group,
         },
       });
     }
@@ -440,6 +441,7 @@ const ExamInterface: React.FC<Props> = ({
         collegeName,
         remainingGroups,
         groupNumber,
+        group,
       },
     });
   };
