@@ -2,7 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { Trophy, Crown, Target, BookOpen, Users, Star, ChevronRight, Home, Calculator, Lock } from "lucide-react";
+import CompetitionBanner from "@/components/CompetitionBanner";
+import {
+  Trophy,
+  Crown,
+  Target,
+  BookOpen,
+  Users,
+  Star,
+  ChevronRight,
+  Home,
+  Lock,
+} from "lucide-react";
 
 const RoundSelectionPage = () => {
   const navigate = useNavigate();
@@ -98,10 +109,19 @@ const RoundSelectionPage = () => {
         style={{ animationDelay: `${index * 200}ms` }}
         onClick={() => goToRound(round.number)}
       >
-        <div className={`absolute inset-0 bg-gradient-to-br ${round.color} ${round.hoverColor} transition-all duration-300 border border-gray-200`} />
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${round.color} ${round.hoverColor} transition-all duration-300 border border-gray-200`}
+        />
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-2 right-2 text-gray-400/30 text-4xl font-bold animate-spin" style={{ animationDuration: "8s" }}>∫</div>
-          <div className="absolute bottom-2 left-2 text-gray-400/30 text-3xl font-bold animate-pulse">∑</div>
+          <div
+            className="absolute top-2 right-2 text-gray-400/30 text-4xl font-bold animate-spin"
+            style={{ animationDuration: "8s" }}
+          >
+            ∫
+          </div>
+          <div className="absolute bottom-2 left-2 text-gray-400/30 text-3xl font-bold animate-pulse">
+            ∑
+          </div>
           <div className="absolute top-1/4 left-1/4 w-8 h-8 bg-gray-300/20 rounded-full animate-pulse" />
           <div className="absolute bottom-1/3 right-1/3 w-6 h-6 bg-gray-300/30 rounded-full animate-bounce" />
         </div>
@@ -112,36 +132,55 @@ const RoundSelectionPage = () => {
           </div>
         )}
 
-        {isSelected && <div className="absolute inset-0 bg-white/40 animate-pulse" />}
+        {isSelected && (
+          <div className="absolute inset-0 bg-white/40 animate-pulse" />
+        )}
 
         <div className="relative z-10 p-6 text-gray-800 h-full flex flex-col justify-between min-h-[200px]">
           <div className="flex items-center justify-between mb-4">
-            <div className={`p-3 rounded-full bg-white/60 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 border border-gray-200 ${isSelected ? "animate-bounce" : ""}`}>
+            <div
+              className={`p-3 rounded-full bg-white/60 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 border border-gray-200 ${
+                isSelected ? "animate-bounce" : ""
+              }`}
+            >
               <Icon className="w-6 h-6" />
             </div>
             <div className="text-right">
-              <div className={`px-2 py-1 rounded-full text-xs font-bold ${
-                round.difficulty === "BASIC" ? "bg-green-200 text-green-800" :
-                round.difficulty === "INTERMEDIATE" ? "bg-blue-200 text-blue-800" :
-                round.difficulty === "ADVANCED" ? "bg-purple-200 text-purple-800" :
-                "bg-yellow-200 text-yellow-800"
-              }`}>
+              <div
+                className={`px-2 py-1 rounded-full text-xs font-bold ${
+                  round.difficulty === "BASIC"
+                    ? "bg-green-200 text-green-800"
+                    : round.difficulty === "INTERMEDIATE"
+                    ? "bg-blue-200 text-blue-800"
+                    : round.difficulty === "ADVANCED"
+                    ? "bg-purple-200 text-purple-800"
+                    : "bg-yellow-200 text-yellow-800"
+                }`}
+              >
                 {round.difficulty}
               </div>
             </div>
           </div>
 
           <div className="flex-grow">
-            <h3 className="text-xl font-bold mb-2 group-hover:text-blue-700 transition-colors">{round.label}</h3>
+            <h3 className="text-xl font-bold mb-2 group-hover:text-blue-700 transition-colors">
+              {round.label}
+            </h3>
             <p className="text-gray-600 text-sm mb-3">{round.description}</p>
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 text-yellow-600" />
-              <span className="text-sm font-semibold">{round.participants} Participants</span>
+              <span className="text-sm font-semibold">
+                {round.participants} Participants
+              </span>
             </div>
-            <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${isSelected ? "translate-x-2" : "group-hover:translate-x-1"}`} />
+            <ChevronRight
+              className={`w-5 h-5 transition-transform duration-300 ${
+                isSelected ? "translate-x-2" : "group-hover:translate-x-1"
+              }`}
+            />
           </div>
         </div>
 
@@ -151,7 +190,8 @@ const RoundSelectionPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
+      <CompetitionBanner />
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => {
           const symbols = ["∫", "∑", "∂", "∇", "∆", "π", "∞", "α", "β"];
@@ -173,7 +213,10 @@ const RoundSelectionPage = () => {
           );
         })}
 
-        <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 1000 1000">
+        <svg
+          className="absolute inset-0 w-full h-full opacity-10"
+          viewBox="0 0 1000 1000"
+        >
           <path
             d="M100,500 Q300,200 500,500 T900,500"
             stroke="gray"
@@ -195,17 +238,17 @@ const RoundSelectionPage = () => {
 
       <div className="relative z-10 container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 mb-6 animate-bounce shadow-lg">
-            <Calculator className="w-5 h-5 text-blue-600" />
-            <span className="text-gray-800 font-semibold text-sm">ROUND SELECTION</span>
-          </div>
-
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 font-poppins animate-title-glow">
-            Choose Your <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Competition Round</span>
+            Choose Your{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Competition Round
+            </span>
           </h1>
 
           <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-2">
-            Select your competition level and prepare for mathematical challenges. Each round presents increasing complexity and academic rigor.
+            Select your competition level and prepare for mathematical
+            challenges. Each round presents increasing complexity and academic
+            rigor.
           </p>
 
           {collegeName && (
@@ -239,7 +282,9 @@ const RoundSelectionPage = () => {
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
             <div className="text-center text-gray-800 bg-white/90 backdrop-blur-lg rounded-2xl p-8 border border-gray-200 shadow-2xl">
               <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-              <h3 className="text-2xl font-bold mb-2">Entering Competition...</h3>
+              <h3 className="text-2xl font-bold mb-2">
+                Entering Competition...
+              </h3>
               <p className="text-gray-600">Preparing your session!</p>
             </div>
           </div>
